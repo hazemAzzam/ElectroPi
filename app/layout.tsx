@@ -38,7 +38,7 @@ export default function RootLayout({
             </Suspense>
 
             <Navbar />
-            <main className="grow rounded-md py-5 items-center flex">{children}</main>
+            <main className="grow rounded-md py-5">{children}</main>
             <Footer />
           </SiteProvider>
         </NuqsAdapter>

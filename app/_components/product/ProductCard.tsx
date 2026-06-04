@@ -1,10 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Product } from "@/app/_domain/product";
 import { Card, CardContent, CardFooter, CardTitle } from "@/app/_components/ui/card";
-
-function formatPrice(value: number): string {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
-}
+import { formatPrice } from "@/app/_lib/utils";
 
 export default function ProductCard({ product }: { product: Product }) {
   const hasDiscount = product.discountPercentage > 0;
@@ -13,6 +11,7 @@ export default function ProductCard({ product }: { product: Product }) {
     : product.price;
 
   return (
+    <Link href={`/product/${product.id}`} className="block h-full">
     <Card
       size="sm"
       className="group h-full overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-md"
@@ -45,5 +44,6 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </CardFooter>
     </Card>
+    </Link>
   );
 }

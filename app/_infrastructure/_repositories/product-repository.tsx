@@ -2,7 +2,7 @@ import { apiService } from "@/app/_services/api-service";
 import { ProductResponseDTO } from "../_dtos/product-dto";
 import { ProductResponseMapper } from "../_mappers/product-response-mapper";
 import { ProductRequestMapper, ProductSearchState } from "../_mappers/product-request-mapper";
-import { Product } from "@/app/_domain/product";
+import { ProductDetail } from "@/app/_domain/product";
 import { Paginated } from "@/app/_domain/paginated";
 import { Category } from "@/app/_domain/category";
 
@@ -32,9 +32,9 @@ export class ProductRepository {
     return this.mapper.toDomainList(dto);
   }
 
-  async getById(id: number): Promise<Product> {
+  async getById(id: number): Promise<ProductDetail> {
     const dto = await apiService.get<ProductResponseDTO["products"][number]>(`/products/${id}`, { auth: false });
-    return this.mapper.toDomain(dto);
+    return this.mapper.toDetail(dto);
   }
 
   async categories(): Promise<string[]> {
