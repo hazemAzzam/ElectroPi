@@ -2,10 +2,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProduct } from "@/src/presentation/actions/get-product";
 import Container from "@/src/presentation/layout/Container";
-import BackLink from "@/src/presentation/components/product/BackLink";
-import ProductGallery from "@/src/presentation/components/product/ProductGallery";
-import ProductInfo from "@/src/presentation/components/product/ProductInfo";
-import ProductReviews from "@/src/presentation/components/product/ProductReviews";
+import BackLink from "@/src/presentation/components/shared/BackLink";
+import ProductGallery from "@/src/presentation/components/product-detail/ProductGallery";
+import ProductInfo from "@/src/presentation/components/product-detail/ProductInfo";
+import ProductReviews from "@/src/presentation/components/product-detail/ProductReviews";
 
 type Props = {
   params: Promise<{ id: string }>;

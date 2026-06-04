@@ -1,6 +1,6 @@
 import { ProductReview } from "@/src/domain/product";
 import { formatDate } from "@/src/presentation/lib/utils";
-import StarRating from "./StarRating";
+import StarRating from "@/src/presentation/components/shared/StarRating";
 
 export default function ProductReviews({ reviews }: { reviews: ProductReview[] }) {
   return (

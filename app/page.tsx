@@ -2,11 +2,11 @@ import { Suspense } from "react";
 import { SearchParams } from "nuqs/server";
 import { getCategories } from "@/src/presentation/actions/get-categories";
 import { getProducts } from "@/src/presentation/actions/get-products";
-import CategoryFilters from "@/src/presentation/components/product/CategoryFilters";
-import CategoryGrid from "@/src/presentation/components/product/CategoryGrid";
-import ProductPagination from "@/src/presentation/components/product/ProductPagination";
-import ProductSearch from "@/src/presentation/components/product/ProductSearch";
-import ProductsEmpty from "@/src/presentation/components/product/ProductsEmpty";
+import CategoryFilters from "@/src/presentation/components/product-list/CategoryFilters";
+import CategoryGrid from "@/src/presentation/components/product-list/CategoryGrid";
+import ProductPagination from "@/src/presentation/components/product-list/ProductPagination";
+import ProductSearch from "@/src/presentation/components/product-list/ProductSearch";
+import ProductsEmpty from "@/src/presentation/components/product-list/ProductsEmpty";
 import Container from "@/src/presentation/layout/Container";
 import { productSearchParamsCache } from "@/src/presentation/lib/product-search-params";
 

@@ -1,7 +1,7 @@
 import { ProductDetail } from "@/src/domain/product";
 import { cn, formatPrice } from "@/src/presentation/lib/utils";
 import { PackageCheck, RotateCcw, ShieldCheck, Truck } from "lucide-react";
-import StarRating from "./StarRating";
+import StarRating from "@/src/presentation/components/shared/StarRating";
 
 export default function ProductInfo({ product }: { product: ProductDetail }) {
   const hasDiscount = product.discountPercentage > 0;
