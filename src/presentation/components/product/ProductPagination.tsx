@@ -9,8 +9,10 @@ export default function ProductPagination({ totalPages }: { totalPages: number }
 
   if (totalPages <= 1) return null;
 
-  const go = (next: number) =>
+  const go = (next: number) => {
     setParams({ page: Math.min(Math.max(next, 1), totalPages) }, { shallow: false });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="flex items-center justify-center gap-3">
@@ -20,12 +22,7 @@ export default function ProductPagination({ totalPages }: { totalPages: number }
       <span className="text-sm text-muted-foreground">
         Page {page} of {totalPages}
       </span>
-      <Button
-        variant="outline"
-        size="sm"
-        disabled={page >= totalPages}
-        onClick={() => go(page + 1)}
-      >
+      <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => go(page + 1)}>
         Next
       </Button>
     </div>
