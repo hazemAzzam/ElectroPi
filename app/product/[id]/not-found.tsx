@@ -1,5 +1,5 @@
-import { Button } from "@/app/_components/ui/button";
-import Container from "@/app/_layout/Container";
+import { Button } from "@/src/presentation/components/ui/button";
+import Container from "@/src/presentation/layout/Container";
 import { PackageX } from "lucide-react";
 import Link from "next/link";
 

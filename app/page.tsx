@@ -1,14 +1,14 @@
 import { Suspense } from "react";
 import { SearchParams } from "nuqs/server";
-import { getCategories } from "./_actions/get-categories";
-import { getProducts } from "./_actions/get-products";
-import CategoryFilters from "./_components/product/CategoryFilters";
-import CategoryGrid from "./_components/product/CategoryGrid";
-import ProductPagination from "./_components/product/ProductPagination";
-import ProductSearch from "./_components/product/ProductSearch";
-import ProductsEmpty from "./_components/product/ProductsEmpty";
-import Container from "./_layout/Container";
-import { productSearchParamsCache } from "./_lib/product-search-params";
+import { getCategories } from "@/src/presentation/actions/get-categories";
+import { getProducts } from "@/src/presentation/actions/get-products";
+import CategoryFilters from "@/src/presentation/components/product/CategoryFilters";
+import CategoryGrid from "@/src/presentation/components/product/CategoryGrid";
+import ProductPagination from "@/src/presentation/components/product/ProductPagination";
+import ProductSearch from "@/src/presentation/components/product/ProductSearch";
+import ProductsEmpty from "@/src/presentation/components/product/ProductsEmpty";
+import Container from "@/src/presentation/layout/Container";
+import { productSearchParamsCache } from "@/src/presentation/lib/product-search-params";
 
 type Props = {
   searchParams: Promise<SearchParams>;

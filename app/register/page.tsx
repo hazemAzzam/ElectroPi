@@ -4,10 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, IdCard, Lock, Mail, User } from "lucide-react";
 
-import { Button } from "../_components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../_components/ui/card";
-import { Input } from "../_components/ui/input";
-import { useRegister } from "../_hook/use-register";
+import { Button } from "@/src/presentation/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/src/presentation/components/ui/card";
+import { Input } from "@/src/presentation/components/ui/input";
+import { useRegister } from "@/src/presentation/hooks/use-register";
 
 export default function RegisterPage() {
   const { handleSubmit, isPending, error } = useRegister();

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./_layout/navbar/Navbar";
-import SiteProvider from "./_providers/SiteProvider";
-import Footer from "./_layout/footer/Footer";
+import Navbar from "@/src/presentation/layout/navbar/Navbar";
+import SiteProvider from "@/src/presentation/providers/SiteProvider";
+import Footer from "@/src/presentation/layout/footer/Footer";
 import { Suspense } from "react";
-import StorageSync from "./_controllers/StorageSync";
+import StorageSync from "@/src/presentation/controllers/StorageSync";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({

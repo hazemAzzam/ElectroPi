@@ -4,10 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
 
-import { Button } from "../_components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../_components/ui/card";
-import { Input } from "../_components/ui/input";
-import { useLogin } from "../_hook/use-login";
+import { Button } from "@/src/presentation/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/src/presentation/components/ui/card";
+import { Input } from "@/src/presentation/components/ui/input";
+import { useLogin } from "@/src/presentation/hooks/use-login";
 
 export default function LoginPage() {
   const { handleSubmit, isPending, error } = useLogin();
