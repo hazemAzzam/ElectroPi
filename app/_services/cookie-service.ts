@@ -2,6 +2,28 @@
 
 import { cookies } from "next/headers";
 import { COOKIES } from "../_constants/cookies-config";
+import { StoredUserDTO } from "../_infrastructure/_dtos/auth-dto";
+
+export async function getRegisteredUsers(): Promise<StoredUserDTO[]> {
+  const raw = (await cookies()).get(COOKIES.USERS.name)?.value;
+  if (!raw) return [];
+
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as StoredUserDTO[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function setRegisteredUsers(users: StoredUserDTO[]) {
+  const cookieStore = await cookies();
+  await cookieStore.set(
+    COOKIES.USERS.name,
+    JSON.stringify(users),
+    COOKIES.USERS.options,
+  );
+}
 
 export async function getAuth() {
   const cookieStore = await cookies();

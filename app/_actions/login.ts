@@ -1,6 +1,6 @@
 "use server";
 
-import { AuthRepository } from "../_infrastructure/_repositories/auth-repository";
+import { container } from "../_application/di";
 import { AuthUser } from "../_domain/auth";
 import { getErrorMessage } from "../_services/api-service";
 import { setAuth } from "../_services/cookie-service";
@@ -8,13 +8,15 @@ import { setAuth } from "../_services/cookie-service";
 export type LoginResult = { ok: true; user: AuthUser } | { ok: false; error: string };
 
 export async function login(input: { username: string; password: string }): Promise<LoginResult> {
-  const repository = new AuthRepository();
-
   try {
-    const session = await repository.login({
+    const session = await container.loginUseCase.execute({
       username: input.username,
       password: input.password,
     });
+
+    if (!session) {
+      return { ok: false, error: "Invalid username or password." };
+    }
 
     await setAuth(session.accessToken);
 

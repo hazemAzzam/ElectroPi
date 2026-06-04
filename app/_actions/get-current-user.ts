@@ -1,6 +1,6 @@
 "use server";
 
-import { AuthRepository } from "../_infrastructure/_repositories/auth-repository";
+import { container } from "../_application/di";
 import { AuthUser } from "../_domain/auth";
 import { getAuth, clearAuth } from "../_services/cookie-service";
 
@@ -13,9 +13,13 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
   if (!token) return null;
 
   try {
-    return await new AuthRepository().me();
+    const user = await container.verifyUseCase.execute(token);
+    if (!user) {
+      await clearAuth();
+      return null;
+    }
+    return user;
   } catch {
-    await clearAuth();
     return null;
   }
 }

@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, Lock, User } from "lucide-react";
+import { Eye, EyeOff, IdCard, Lock, Mail, User } from "lucide-react";
 
 import { Button } from "../_components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../_components/ui/card";
 import { Input } from "../_components/ui/input";
-import { useLogin } from "../_hook/use-login";
+import { useRegister } from "../_hook/use-register";
 
-export default function LoginPage() {
-  const { handleSubmit, isPending, error } = useLogin();
+export default function RegisterPage() {
+  const { handleSubmit, isPending, error } = useRegister();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -19,18 +19,38 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}>
           <Card>
             <CardHeader>
-              <CardTitle>Login</CardTitle>
-              <CardDescription>Enter your credentials to continue</CardDescription>
+              <CardTitle>Create account</CardTitle>
+              <CardDescription>Sign up to start shopping on ElectroPi</CardDescription>
             </CardHeader>
 
             <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-medium leading-none">
+                  Full name
+                </label>
+                <div className="relative">
+                  <IdCard className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input id="name" name="name" type="text" autoComplete="name" placeholder="Your name" className="pl-8" required />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium leading-none">
+                  Email
+                </label>
+                <div className="relative">
+                  <Mail className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" className="pl-8" required />
+                </div>
+              </div>
+
               <div className="space-y-2">
                 <label htmlFor="username" className="text-sm font-medium leading-none">
                   Username
                 </label>
                 <div className="relative">
                   <User className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input id="username" name="username" type="text" autoComplete="username" placeholder="Your username" className="pl-8" required />
+                  <Input id="username" name="username" type="text" autoComplete="username" placeholder="Choose a username" className="pl-8" required />
                 </div>
               </div>
 
@@ -40,7 +60,7 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <Lock className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" placeholder="Your password" className="px-8" required />
+                  <Input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="new-password" placeholder="Create a password" className="px-8" required />
                   <button type="button" onClick={() => setShowPassword((prev) => !prev)} aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground">
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
@@ -56,16 +76,16 @@ export default function LoginPage() {
 
             <CardFooter>
               <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? "Logging in…" : "Login"}
+                {isPending ? "Creating account…" : "Create account"}
               </Button>
             </CardFooter>
           </Card>
         </form>
 
         <p className="text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/register" className="font-medium text-foreground underline-offset-4 hover:underline">
-            Create one
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-foreground underline-offset-4 hover:underline">
+            Log in
           </Link>
         </p>
       </div>

@@ -1,8 +1,16 @@
 export interface LoginRequestDTO {
   username: string;
   password: string;
-  /** DummyJSON access-token lifetime in minutes. Defaults to 60. */
   expiresInMins?: number;
+}
+
+/** A locally registered user persisted in the cookie store. */
+export interface StoredUserDTO {
+  id: number;
+  username: string;
+  password: string;
+  email: string;
+  name: string;
 }
 
 export interface AuthResponseDTO {
