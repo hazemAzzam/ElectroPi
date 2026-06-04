@@ -6,6 +6,7 @@ import SiteProvider from "./_providers/SiteProvider";
 import Footer from "./_layout/footer/Footer";
 import { Suspense } from "react";
 import StorageSync from "./_controllers/StorageSync";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,15 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <SiteProvider>
-          <Suspense fallback={null}>
-            <StorageSync />
-          </Suspense>
+        <NuqsAdapter>
+          <SiteProvider>
+            <Suspense fallback={null}>
+              <StorageSync />
+            </Suspense>
 
-          <Navbar />
-          <main className="grow rounded-md py-5 items-center flex">{children}</main>
-          <Footer />
-        </SiteProvider>
+            <Navbar />
+            <main className="grow rounded-md py-5 items-center flex">{children}</main>
+            <Footer />
+          </SiteProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
