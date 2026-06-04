@@ -1,0 +1,143 @@
+{
+  "info": {
+    "name": "ElectroPi — DummyJSON API",
+    "description": "API requests used by the ElectroPi storefront. Backed by the public DummyJSON API (https://dummyjson.com). Set the `baseUrl` collection variable (defaults to https://dummyjson.com). The Login request automatically saves the returned access token into the `accessToken` variable, which `/auth/me` then uses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://dummyjson.com", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.accessToken) {",
+                  "  pm.collectionVariables.set('accessToken', json.accessToken);",
+                  "}",
+                  "pm.test('status is 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"emilys\",\n  \"password\": \"emilyspass\",\n  \"expiresInMins\": 30\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Authenticate a user. Returns access/refresh tokens. The test script saves accessToken into the collection variable."
+          }
+        },
+        {
+          "name": "Get current user (me)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            },
+            "description": "Verify the current session / resolve the user from the access token."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products (paginated)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products?limit=30&skip=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"],
+              "query": [
+                { "key": "limit", "value": "30" },
+                { "key": "skip", "value": "0" }
+              ]
+            },
+            "description": "Product listing with pagination (limit + skip)."
+          }
+        },
+        {
+          "name": "Search products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products/search?q=phone&limit=30&skip=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "search"],
+              "query": [
+                { "key": "q", "value": "phone" },
+                { "key": "limit", "value": "30" },
+                { "key": "skip", "value": "0" }
+              ]
+            },
+            "description": "Free-text product search by title."
+          }
+        },
+        {
+          "name": "Products by category",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products/category/smartphones?limit=30&skip=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "category", "smartphones"],
+              "query": [
+                { "key": "limit", "value": "30" },
+                { "key": "skip", "value": "0" }
+              ]
+            },
+            "description": "Products filtered by a category slug."
+          }
+        },
+        {
+          "name": "Product detail",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "1"]
+            },
+            "description": "Single product detail (includes images and reviews)."
+          }
+        },
+        {
+          "name": "Category list",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/products/category-list",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "category-list"]
+            },
+            "description": "List of category slugs for the filter UI."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -27,6 +27,7 @@ Next.js routing.
 | URL state         | [`nuqs`](https://nuqs.47ng.com) (search/filter params)        |
 | Data source       | [DummyJSON](https://dummyjson.com) REST API                   |
 | Linting           | ESLint 9 (`eslint-config-next`)                               |
+| Testing           | [Vitest](https://vitest.dev) + [React Testing Library](https://testing-library.com/react) (jsdom) |
 
 ## API — DummyJSON
 
@@ -43,6 +44,14 @@ environment variable (`https://dummyjson.com`).
 | `GET`  | `/products/category/{slug}`     | Products filtered by category                        |
 | `GET`  | `/products/{id}`                | Single product detail (with reviews)                |
 | `GET`  | `/products/category-list`       | List of category slugs for the filter UI            |
+
+### Postman collection
+
+A ready-to-import Postman collection covering every endpoint above lives at
+[`postman/electro-pi.postman_collection.json`](postman/electro-pi.postman_collection.json).
+Import it into Postman, then run **Auth → Login** first — it saves the returned
+access token into a collection variable that **Auth → Get current user (me)**
+reuses automatically. The `baseUrl` variable defaults to `https://dummyjson.com`.
 
 > Note: DummyJSON is a mock API — writes (login/register) are not persisted
 > server-side. Locally registered users are stored in an httpOnly cookie so they
@@ -66,9 +75,14 @@ bun install
 
 ### 2. Configure environment
 
-Create a `.env` file in the project root:
+Copy the example env file and adjust if needed:
 
 ```bash
+cp .env.example .env
+```
+
+```bash
+# .env
 API_BASE_URL=https://dummyjson.com
 ```
 
@@ -93,6 +107,20 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Production build                     |
 | `npm run start` | Serve the production build           |
 | `npm run lint`  | Run ESLint                           |
+| `npm test`      | Run the unit tests once (Vitest)     |
+| `npm run test:watch` | Run tests in watch mode         |
+| `npm run test:coverage` | Run tests with a coverage report |
+
+## Testing
+
+Unit tests run on [Vitest](https://vitest.dev) with React Testing Library and
+live under [`tests/`](tests/). They cover the auth/product mappers, the login and
+register use cases (including the cookie → remote fallback ordering), the
+formatting utilities, and the `ProductCard` component.
+
+```bash
+npm test
+```
 
 ## Project structure
 
@@ -103,4 +131,6 @@ src/
   application/        Use cases + interfaces (ports)
   infrastructure/     Repositories, DTOs, mappers, services, constants, DI
   presentation/       Components, actions, hooks, controllers, layout, lib, providers
+tests/                Unit tests (Vitest) mirroring the src/ layout
+postman/              Importable Postman collection for the API
 ```
