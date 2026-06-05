@@ -16,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <Image src={product.image} alt={product.title} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-300 group-hover:scale-105" />
           </div>
         </CardHeader>
-        <CardContent className="flex flex-col gap-1">
+        <CardContent className="flex flex-col gap-1 grow">
           <span className="text-xs text-muted-foreground capitalize">{product.category}</span>
           <CardTitle className="line-clamp-2 transition-colors group-hover:text-primary">{product.title}</CardTitle>
           <p className="line-clamp-2 text-xs text-muted-foreground">{product.description}</p>
