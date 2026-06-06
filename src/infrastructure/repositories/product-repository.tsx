@@ -22,6 +22,10 @@ export class ProductRepository {
   async list(state: ProductSearchState): Promise<Paginated<Category>> {
     const { q, category, limit, skip } = this.requestMapper.toListParams(state);
 
+    /**
+     * The API exposes search and category as separate endpoints, so the two
+     * can't be combined in one request. We prioritize q over category.
+     */
     const path = q ? "/products/search" : category ? `/products/category/${category}` : "/products";
 
     const dto = await apiService.get<ProductResponseDTO>(path, {
