@@ -3,10 +3,13 @@ import { CookieAuthRepository } from "@/src/infrastructure/repositories/cookie-a
 import { LoginUseCase } from "@/src/application/use-cases/login-use-case";
 import { RegisterUseCase } from "@/src/application/use-cases/register-use-case";
 import { VerifyUseCase } from "@/src/application/use-cases/verify-use-case";
+import { ProductRepository } from "./repositories/product-repository";
 
 // --- Repositories ---
 const authRepository = new AuthRepository();
 const cookieAuthRepository = new CookieAuthRepository();
+
+const productsRepository = new ProductRepository();
 
 // Ordered auth sources: local cookie store first, remote API second.
 const authSources = [cookieAuthRepository, authRepository];
@@ -19,6 +22,7 @@ const registerUseCase = new RegisterUseCase(cookieAuthRepository);
 export const container = {
   authRepository,
   cookieAuthRepository,
+  productsRepository,
   loginUseCase,
   verifyUseCase,
   registerUseCase,
